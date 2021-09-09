@@ -6,9 +6,11 @@
         private $_experience = 0;
 
         public function parler() {
-        print("Je suis un personnage."); }
+            print("Je suis un personnage.");}
     
-        public function frapper() {}
+        public function frapper() {
+             }
 
-        public function gagnerExperience() {}}
+        public function gagnerExperience() {
+             }}
 ?>
