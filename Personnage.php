@@ -1,47 +1,96 @@
 <?php
     class Personnage {
         private $_nom = 'Inconnu';
-        private $_force = 0;
-        private $_degats = 0;
+        private $_force = 100;
+        private $_degats = 10;
         private $_experience = 0;
 
-        public function __construct($nom) {
-            $this -> _nom = $nom;
+        public function __construct($nom, $force = 50, $degats = 1) {
+            $this -> setNom($nom);
+            $this -> setForce($force);
+            $this -> setDegats($degats);
+            $this -> setExperience(1);
 
-            print("<br>Le personnage " . $this -> _nom);
+            print('<br>Le personnage "' . $nom . '" est crée !');
         }
 
-        public function definirForce($force) {
+        public function __toString() {
+            return $this -> getNom();
+        }
+
+        public function setNom($nom) {
+            if (!is_string($nom)) {
+                trigger_error("Le nom d'un personnage doit être un texte", E_USER_ERROR);
+                return;
+            }
+        }
+
+        public function getNom() {
+            return $this -> _nom;
+        }
+
+        public function setForce($force) {
+            if (!is_int($force)) {
+                trigger_error("La force d'un personnage doit être un nombre entier", E_USER_ERROR);
+                return;
+            }
+
+            if ($force > 100) {
+                trigger_error("La force d'un personnage ne peut dépasser 100", E_USER_ERROR);
+                return;
+            }
+
             $this -> _force = $force;
         }
 
-        public function definirDegats($_degats) {
-            $this -> _degats = $_degats;
+        public function getForce($force) {
+            return $this -> _force;
         }
 
-        public function afficherDegats() {
+        public function setDegats($degats) {
+            if (!is_int($degats)) {
+                trigger_error("La force d'un personnage doit être un nombre entier", E_USER_ERROR);
+                return;
+            }
+            
+            $this -> _degats = $degats;
+        }
+
+        public function getDegats() {
             return $this -> _degats;
         }
 
-        public function definirExperience($_experience) {
-            $this -> _experience = $_experience;
+        public function setExperience($experience) {
+            if (!is_int($experience)) {
+                trigger_error("L'experience d'un personnage doit être un nombre entier", E_USER_ERROR);
+                return;
+            }
+
+            if ($experience > 100) {
+                trigger_error("L'experience d'un personnage ne peut dépasser 100", E_USER_ERROR);
+                return;
+            }
+
+            $this -> _experience = $experience;
+        }
+
+        public function getExperience($experience) {
+            return $this -> _experience;
         }
 
         public function parler() {
             print("Je suis un personnage !");
         }
 
-        public function frapper($adversaire) {
-            $adversaire -> _degats = $adversaire -> _degats + $this -> _force;
+        public function frapper(Personnage $persoAFrapper) {
+            $persoAFrapper -> _degats += $this -> _force;
             $this -> gagnerExperience();
+
+            print('<br/>' . $persoAFrapper -> getNom() . ' a été frappé par ' . $this . ' -> Dégats de ' . $persoAFrapper . ' = ' . $persoAFrapper -> getDegats());
         }
 
         public function gagnerExperience() {
             $this -> _experience++;
-        }
-
-        public function afficherExperience() {
-            return $this -> _experience;
         }
     }
 ?>

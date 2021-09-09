@@ -14,21 +14,19 @@
             <?php
                 include "Personnage.php";
 
-                print("<h1>Jeu de Combat</h1><br><br><br>");
+                print("<h1>SUPER SMASH PROF ULTIMATE</h1><br><br><br>");
 
-                $perso1 = new Personnage("HOMMET");
-                $perso1 -> definirForce(20);
-                $perso1 -> definirExperience(15);
+                $perso1 = new Personnage('HOMMET');
+                $perso1 -> setExperience(15);
 
-                $perso2 = new Personnage("LECOUVREUR");
-                $perso2 -> definirForce(60);
-                $perso2 -> definirExperience(1);
+                $perso2 = new Personnage('LECOUVREUR', 60, 0);
+                $perso2 -> setExperience(1);
 
                 $perso1 -> frapper($perso2);
                 $perso2 -> frapper($perso1);
 
-                print("<br>Dégâts du J1 = " . $perso1 -> afficherDegats());
-                print("<br>Dégâts du J2 = " . $perso2 -> afficherDegats());
+                print("<br>Dégâts du J1 = " . $perso1 -> getDegats());
+                print("<br>Dégâts du J2 = " . $perso2 -> getDegats());
 
             ?>
 
