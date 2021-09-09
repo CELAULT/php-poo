@@ -16,18 +16,18 @@
 
                 print("<h1>Jeu de Combat</h1><br><br><br>");
 
-                $perso1 = new Personnage();
+                $perso1 = new Personnage("HOMMET");
                 $perso1 -> definirForce(20);
                 $perso1 -> definirExperience(15);
 
-                $perso2 = new Personnage();
+                $perso2 = new Personnage("LECOUVREUR");
                 $perso2 -> definirForce(60);
                 $perso2 -> definirExperience(1);
 
                 $perso1 -> frapper($perso2);
                 $perso2 -> frapper($perso1);
 
-                print("Dégâts du J1 = " . $perso1 -> afficherDegats());
+                print("<br>Dégâts du J1 = " . $perso1 -> afficherDegats());
                 print("<br>Dégâts du J2 = " . $perso2 -> afficherDegats());
 
             ?>

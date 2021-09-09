@@ -5,6 +5,12 @@
         private $_degats = 0;
         private $_experience = 0;
 
+        public function __construct($nom) {
+            $this -> _nom = $nom;
+
+            print("<br>Le personnage " . $this -> _nom);
+        }
+
         public function definirForce($force) {
             $this -> _force = $force;
         }
