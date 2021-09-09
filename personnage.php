@@ -3,5 +3,9 @@
         private $_nom = 'Inconnu';
         private $_force = 50;
         private $_degats = 10;
-        private $_experience = 0; }
+        private $_experience = 0;
+    
+        public function frapper() {}
+
+        public function gagnerExperience() {}}
 ?>
