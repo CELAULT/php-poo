@@ -1,7 +1,7 @@
 <?php
     class Personnage {
-        private $_nom;
-        private $_force;
-        private $_degats;
-        private $_experience; }
+        private $_nom = 'Inconnu';
+        private $_force = 50;
+        private $_degats = 10;
+        private $_experience = 0; }
 ?>
