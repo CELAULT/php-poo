@@ -12,7 +12,7 @@
     <body>
         <center>
             <?php
-                include "personnage.php";
+                include "Personnage.php";
 
                 print("<h1>Jeu de Combat</h1><br><br><br>");
 
