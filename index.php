@@ -5,4 +5,5 @@
 
     $perso = new Personnage();
     $perso -> parler();
+    $perso -> _experience = $perso -> _experience + 1;
 ?>
