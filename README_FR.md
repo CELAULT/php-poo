@@ -1,7 +1,7 @@
-# Jeu de Cambat
+# Jeu de combat
 
-## Instalation
+## Installation
 
-- Copier le ficher `conf-sample.php` en `conf.php`.
-- Mettre à jour le fichier `conf.php` à partir de vos infos de connexion à la base de données.
-- `php -S localhost:8000`.
+- Copier le fichier `conf-sample.php` en `conf.php`
+- Mettre à jour le fichier `conf.php` à partir de vos infos de connexion à la base de données
+- `php -S localhost:8000`

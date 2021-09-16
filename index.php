@@ -1,28 +1,29 @@
-<!doctype html>
-<html lang="fr">
+<?php
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+function chargerClasse(string $classe)
+{
+  include $classe . '.php'; // On inclut la classe correspondante au paramètre passé.
+}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+// On enregistre la fonction en autoload 
+// pour qu'elle soit appelée dès qu'on instanciera une classe non déclarée.
+spl_autoload_register('chargerClasse'); 
 
-    <title>Jeu de Combat</title>
-</head>
-
-<body>
-    <center>
-        <?php
-        function chargerClasse(string $classe)
+try {
+    $db = new PDO($dsn, $user, $password);
+    //$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Si toutes les colonnes sont converties en string
+    if ($db) {
+        print('<br/>Lecture dans la base de données :');
+        $request = $db->query('SELECT id, nom, `force`, degats, niveau, experience FROM personnages;');
+        while ($ligne = $request->fetch(PDO::FETCH_ASSOC)) // Chaque entrée sera récupérée et placée dans un array.
         {
-            include $classe . '.php';
+          // On passe les données (stockées dans un tableau) concernant le personnage au constructeur de la classe.
+          // qui va être chargé d'assigner les valeurs qu'on lui a données, aux attributs correspondants.
+          $perso = new Personnage($ligne);                
+          print('<br/>' . $perso->getNom() . ' a '. $perso->getForce() . ' de force, ' . $perso->getDegats()
+            . ' de dégâts, ' . $perso->getExperience() . ' d\'expérience et est au niveau ' . $perso->getNiveau());
         }
-
-        spl_autoload_register('chargerClasse');
-        ?>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    </center>
-</body>
-
-</html>
+    }
+} catch (PDOException $e) {
+    print('<br/>Erreur de connexion : ' . $e->getMessage());
+}
