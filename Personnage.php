@@ -15,15 +15,19 @@
         private static $_texteADire = 'La partie est démarrée. Qui veut se battre !';
         private static $_nbreJoueurs = 0;
 
-        public function __construct(string $nom, int $force = 50, int $degats = 0)
+        public function __construct(array $ligne)
         {
-            $this->setNom($nom);
-            $this->setForce($force);
-            $this->setDegats($degats);
-            $this->setExperience(1);
+            $this->hydrate($ligne);
             self::$_nbreJoueurs++;
+            print('<br/> Le personnage "' . (string)$ligne['nom'] . '" est créé !');
+        }
 
-            print('<br/> Le personnage "' . $nom . '" est créé !');
+        public function hydrate(array $ligne)
+        {
+            $this->setNom((string)$ligne['nom']);
+            $this->setForce((int)$ligne['force']);
+            $this->setDegats((int)$ligne['degats']);
+            $this->setExperience(1);
         }
 
         public function __toString(): string
