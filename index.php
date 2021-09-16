@@ -6,6 +6,8 @@
 
   spl_autoload_register('chargerClasse');
 
+  include "conf.php";
+
   try {
       $db = new PDO($dsn, $user, $password);
 
