@@ -25,6 +25,10 @@ class PersonnagesManager
 
     public function getOne(int $id)
     {
+        $ligne = $request -> fetch(PDO::FETCH_ASSOC)
+        $perso = new Personnage($ligne);
+
+        return $perso;
     }
 
     public function getList(): array
