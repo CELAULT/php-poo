@@ -1,26 +1,49 @@
-<?php
-  function chargerClasse(string $classe)
-  {
+<!doctype html>
+
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+  <title>SUPER SMASH PROF.</title>
+</head>
+
+<body>
+  <center>
+    <h1>SUPER SMASH PROF.</h1>
+
+    <?php
+    function chargerClasse(string $classe)
+    {
       include $classe . '.php';
-  }
+    }
 
-  spl_autoload_register('chargerClasse');
+    spl_autoload_register('chargerClasse');
 
-  include "conf.php";
+    include "conf.php";
 
-  try {
+    try {
       $db = new PDO($dsn, $user, $password);
+      $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-      if ($db) {
-          print('<br/>Lecture dans la base de données :');
-          $request = $db->query('SELECT id, nom, `force`, degats, niveau, experience FROM personnages;');
+      $personnagesManager = new PersonnagesManager($db);
+      $personnages = $personnagesManager->getList();
 
-          while ($ligne = $request->fetch(PDO::FETCH_ASSOC)) {
-              $perso = new Personnage($ligne);
-              print('<br/>' . $perso->getNom() . ' a ' . $perso->getForce() . ' de force, ' . $perso->getDegats() . ' de dégâts, ' . $perso->getExperience() . ' d\'expérience et est au niveau ' . $perso->getNiveau());
-          }
+      print('<br> Liste des personnages : ');
+
+      foreach ($personnages as $personnages) {
+        print('<br>' . $personnages->getNom());
       }
-  } catch (PDOException $e) {
+    } catch (PDOException $e) {
       print('<br/>Erreur de connexion : ' . $e->getMessage());
-  }
-?>
+    }
+    ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  </center>
+</body>
+
+</html>
