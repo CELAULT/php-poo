@@ -1,7 +1,7 @@
-# Battle game
+# Super Smash Teach. Ultimate
 
 ## Installation
 
-- Copy the file `conf-sample.php` into` conf.php`
-- Update the `conf.php` file with your database connection informations
-- `php -S localhost: 8000`
+- Copy the file `conf-sample.php` into `conf.php`.
+- Update the `conf.php` file from your database connection info.
+- `php -S localhost: 8000`.
