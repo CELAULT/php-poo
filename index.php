@@ -1,24 +1,58 @@
-<?php
-  include 'header.php';
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  try
-  {
-    $db = new PDO($dsn, $user, $password);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $personnagesManager = new PersonnagesManager($db);
-    $personnages = $personnagesManager->getList();
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
-    print('<br/>Liste des personnages : ');
+    <title>SSPU</title>
+  </head>
 
-    foreach ($personnages as $personnage)
-    {
-      print('<br/><a target="_blank" href="personnage_view.php?id=' . $personnage->getId() . '">'. $personnage->getNom() . '</a>');
-    }
+  <body>
+    <center>
+    <h1>SUPER SMASH PROF. ULTIMATE</h1>
 
-  }
-  
-  catch (PDOException $e)
-  {
-    print('<br/>Erreur de connexion : ' . $e->getMessage());
-  }
-?>
+    <?php
+      include 'header.php';
+
+      try
+      {
+        $db = new PDO($dsn, $user, $password);
+        $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+        $unMagicien = new Magicien(
+        [
+          'id' => 7, 'nom' => 'STEEEVEN', 'force' => 20,
+        ]);
+
+        $unMagicien = new Archer(
+        [
+          'id' => 8, 'nom' => 'Milfried', 'force' => 20,
+        ]);
+
+        $combat = new TerrainDeCombat();
+        $combat -> lancerUnCombat($unMagicien, $unAutrePerso);
+
+        $personnagesManager = new PersonnagesManager($db);
+        $personnages = $personnagesManager->getList();
+
+        print('<br/>Liste des personnages : ');
+
+        foreach ($personnages as $personnage)
+        {
+          print('<br/><a target="_blank" href="personnage_view.php?id=' . $personnage->getId() . '">'. $personnage->getNom() . '</a>');
+        }
+
+      }
+      
+      catch (PDOException $e)
+      {
+        print('<br/>Erreur de connexion : ' . $e->getMessage());
+      }
+    ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </center>
+  </body>
+</html>

@@ -1,16 +1,21 @@
 <?php
-    class Personnage
+    abstract class Personnage
     {
         private $_id = 0;
         private $_nom = 'Inconnu';
-        private $_force = 50;
+        protected $_force = 50;
         private $_experience = 1;
         private $_degats = 0;
         private $_niveau = 0;
+        private $_classe = 0;
 
         const FORCE_PETITE = 20;
         const FORCE_MOYENNE = 50;
         const FORCE_GRANDE = 80;
+
+        const MAGICIEN = 1;
+        const ARCHER = 2;
+        const BRUTE = 3;
 
         private static $_texteADire = 'La partie est démarrée. Qui veut se battre !';
         private static $_nbreJoueurs = 0;
@@ -177,6 +182,32 @@
             return $this->_experience;
         }
 
+        public function setClasse(int $_classe): Personnage
+        {
+            if (!is_int($_classe))
+            {
+                trigger_error('L\'expérience d\'un personnage doit être un nombre entier', E_USER_WARNING);
+                
+                return $this;
+            }
+
+            if ($_classe > 100)
+            {
+                trigger_error('L\'expérience d\'un personnage ne peut dépasser 100', E_USER_WARNING);
+
+                return $this;
+            }
+
+            $this->_classe = $_classe;
+
+            return $this;
+        }
+
+        public function getClasse(): int
+        {
+            return $this->_classe;
+        }
+
         public function gagnerExperience(): Personnage
         {
             $this->_experience++;
@@ -189,15 +220,6 @@
             print('<br/><br/>Je suis le personnage n°' . self::$_nbreJoueurs . ' <br/>' . self::$_texteADire . '<br/>');
         }
 
-        public function frapper(Personnage $persoAFrapper): Personnage
-        {
-            $persoAFrapper->_degats += $this->_force;
-
-            $this->gagnerExperience();
-
-            print('<br/> ' . $persoAFrapper->getNom() . ' a été frappé par ' . $this->getNom());
-
-            return $this;
-        }
+        abstract public function frapper(Personnage $persoAFrapper) : Personnage;
     }
 ?>
