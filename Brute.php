@@ -1,13 +1,15 @@
 <?php
-    class Brute extends Personnage
+final class Brute extends Personnage
+{
+    public function attaquer(Personnage $persoAFrapper): Personnage
     {
-        private $_magie;
+        $persoAFrapper->_degats += $this->_force;
 
-        public function frapper(Personnage $persoAFrapper) : Personnage
-        {
-            $persoAFrapper -> _degats += $this -> _force;
-
-            return $this;
-        }
+        return $this;
     }
-?>
+
+    public function insulter()
+    {
+        print("<br><br>BRUTE : Gnngnngnn !");
+    }
+}

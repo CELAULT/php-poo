@@ -1,0 +1,15 @@
+body
+{
+    color:black;
+    background-color:white;
+    background-image:url(SSBU-Battlefield.png);
+}
+
+h1 { color: red; }
+h1{text-shadow:0 4px 0 darkred, 0 -4px 0 darkred, 4px 0 0 darkred, -4px 0 0 darkred;}
+
+h3 { color: red; }
+h3{text-shadow:0 2px 0 darkred, 0 -2px 0 darkred, 2px 0 0 darkred, -2px 0 0 darkred;}
+
+h5 { color: red; }
+h5{text-shadow:0 1px 0 darkred, 0 -1px 0 darkred, 1px 0 0 darkred, -1px 0 0 darkred;}
